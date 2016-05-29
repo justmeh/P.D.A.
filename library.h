@@ -6,12 +6,6 @@
         struct Nod * next;
     }Nod;
 
-    typedef struct Node{
-        int data;
-        struct Node *right;
-        struct Node *left;
-    }Node;
-
     //Push functions for single-linked lists
     void print_list(Nod *head);
     void push_first(Nod *head, int value);
@@ -23,9 +17,10 @@
     int pop_last(Nod * head);
     int pop_poz(Nod *head, int poz);
 
-    //Read/Print functions for arrays
+    //Read/Print functions
     void printArray(int arr[], int n);
     void readArray(int arr[], int n);
+    void readMat(int a[100][100], int n);
 
     //Heap sort funtions
     void heapify(int arr[], int n, int i);
@@ -45,8 +40,12 @@
     void countSort(int arr[], int n, int exp);
     void radixsort(int arr[], int n);
 
-    //DFS functions
-    void readMat(int a[100][100], int n);
+    //DFS function
     void dfs(int root, int a[100][100], int visited[], int n);
+
+    //Backtracking standard functions
+    int printSolution();
+    int valid();
+    void backtracking();
 
 #endif
