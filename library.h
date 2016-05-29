@@ -40,6 +40,11 @@
     int partitionn(int arr[], int l, int h);
     void quickSort(int arr[], int l, int h);
 
+    //Radix sort funtions
+    int getMax(int arr[], int n);
+    void countSort(int arr[], int n, int exp);
+    void radixsort(int arr[], int n);
+
     //DFS functions
     void readMat(int a[100][100], int n);
     void dfs(int root, int a[100][100], int visited[], int n);
