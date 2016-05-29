@@ -6,13 +6,11 @@
 
 long long i,VAR[50];
 
-void afisare(int x)
-{
+void afisare(int x){
     printf("- %d\n",x);
 }
 
-int declare_var(char *line)
-{
+int declare_var(char *line){
     int lenght = strlen(line);
     char var = line[0];
     long long val=0;
@@ -33,32 +31,27 @@ int declare_var(char *line)
     afisare(val);
 }
 
-struct node
-{
+struct node{
 	char kind;
 	char op;
 	int number;
 	struct node *left,*right;
 };
 
-struct stack
-{
+struct stack{
 	struct node *data[MAX];
 	int top;
 };
 
-int isempty(struct stack *s)
-{
+int isempty(struct stack *s){
 	return s->top == EMPTY;
 }
 
-void emptystack(struct stack* s)
-{
+void emptystack(struct stack* s){
 	s->top=EMPTY;
 }
 
-void push(struct stack* s, struct node *item)
-{
+void push(struct stack* s, struct node *item){
 	if(s->top == (MAX-1))
 	{
 		printf("\nSTACK FULL");
@@ -67,12 +60,10 @@ void push(struct stack* s, struct node *item)
 	{
 		++s->top;
 		s->data[s->top]=item;
-
 	}
 }
 
-struct node* pop(struct stack* s)
-{
+struct node* pop(struct stack* s){
 	struct node *ret=NULL;
 	if(!isempty(s))
 	{
@@ -82,29 +73,19 @@ struct node* pop(struct stack* s)
 	return ret;
 }
 
-int isoperator(char e)
-{
+int isoperator(char e){
 	if(e == '+' || e == '-' || e == '*' || e == '/' || e == '^')
 		return 1;
     return 0;
 }
 
-int priority(char e)
-{
-	int pri = 0;
-
+int priority(char e){
 	if(e == '*' || e == '/' || e =='^')
-		pri = 2;
-	else
-	{
-		if(e == '+' || e == '-')
-			pri = 1;
-	}
-	return pri;
+		return 2;
+    return 1;
 }
 
-void infix2postfix(char* infix, char * postfix, int space)
-{
+void infix2postfix(char* infix, char * postfix, int space){
 	char *i,*p;
 	struct stack X;
 	char n1;
@@ -151,13 +132,12 @@ void infix2postfix(char* infix, char * postfix, int space)
             {
                 *p = *i;
 				p++;
-                i++;
-                int w=VAR[*i-'a'];
+                int w=VAR[*(i+1)-'a'];
                 if(w<0){
                     p--;
                     w=-w;
                 }
-                i++;
+                i+=2;
                 int ww=0;
                 while(w){
                     ww=ww*10+w%10;
@@ -214,8 +194,7 @@ void infix2postfix(char* infix, char * postfix, int space)
 	*p = '\0';
 }
 
-void make_tree(char* postfix, struct node **root)
-{
+void make_tree(char* postfix, struct node **root){
 	struct stack X;
 	struct node *newnode,*op1,*op2;
 	char numberextract[100];
@@ -230,7 +209,6 @@ void make_tree(char* postfix, struct node **root)
 		{
 			p++;
 		}
-
 		if(isdigit(*p))
 		{
 			while(isdigit(*p))
@@ -300,8 +278,7 @@ void make_tree(char* postfix, struct node **root)
     *root = pop(&X);
 }
 
-int evaluatetree(struct node *x)
-{
+int evaluatetree(struct node *x){
     if( x->kind == 'O' )
 	{
         int op1 = evaluatetree( x->left );
@@ -313,7 +290,6 @@ int evaluatetree(struct node *x)
             case '*':   return op1 * op2;
             case '/':   return op1 / op2;
             case '^':   return pow(op1,op2);
-
             default:   return 0;
         }
     }
@@ -321,8 +297,7 @@ int evaluatetree(struct node *x)
         return x->number;
 }
 
-int read()
-{
+int read(){
     char line[1024],*var;
     printf("> ");
     gets(line);
@@ -355,8 +330,7 @@ int read()
     }
 }
 
-int main()
-{
+int main(){
     while(1){
         read();
     }
