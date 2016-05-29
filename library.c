@@ -284,3 +284,15 @@ void dfs(int root, int a[100][100], int visited[], int n) {
 		dfs(i,a,visited,n);
 	}
 }
+
+int printSolution(){
+    return 0;
+}
+
+int valid(){
+    return 0;
+}
+
+void backtracking(){
+
+}
