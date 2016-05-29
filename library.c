@@ -275,18 +275,42 @@ void readMat(int a[100][100], int n){
     printf("%c",'\n');
 }
 
-void dfs(int root, int a[100][100], int visited[], int n) {
+void dfs_mat(int root, int n){
 	int i;
+	static int visited[100];
 	visited[root]=1;
 	for(i=1;i<=n;i++)
-	  if(a[root][i] && !visited[i]) {
+	  if(adj_mat[root][i] && !visited[i]) {
 		printf("\n%d->%d",root,i);
-		dfs(i,a,visited,n);
+		dfs_mat(i,n);
 	}
 }
 
-int printSolution(){
-    return 0;
+void bfs_mat(int root, int n){
+    int i,head = 0,tail = 0;
+    int q[200];
+    static int visited[100];
+    printf("%d ",root);
+    visited[root]=1;
+    q[tail]=root;
+
+    while(head<=tail)
+    {
+        root=q[head++];
+        for(i=1;i<=n;i++)
+        {
+            if( adj_mat[root][i]==1 && !visited[i])
+            {
+                printf("%d ",i);
+                visited[i]=1;
+                ++tail;
+                q[tail]=i;
+             }
+        }
+    }
+}
+
+void printSolution(){
 }
 
 int valid(){
@@ -294,5 +318,51 @@ int valid(){
 }
 
 void backtracking(){
+    /*int pval;
+    for(pval=1;pval<=n;pval++)
+        if(d[pval]==0) {
+            d[pval]=1;
+            st[p]=pval;
+            if(p==n)
+                afiseaza(p);
+            else bktr(p+1);
+            d[pval]=0;
+        }
+    */
+}
 
+int count_coin( int S[], int m, int n ){
+    int i, j, x, y;
+    int table[n+1][m];
+    for (i=0; i<m; i++)
+        table[0][i] = 1;
+
+    for (i = 1; i < n+1; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            x = (i-S[j] >= 0)? table[i - S[j]][j]: 0;
+            y = (j >= 1)? table[i][j-1]: 0;
+            table[i][j] = x + y;
+        }
+    }
+    return table[n][m-1];
+}
+
+int knapsack(int n, int g){
+    static int d[100], w[100], p[100],i,j,ans;
+    for(i=1; i<=n; i++)
+        scanf("%d%d",&w[i],&p[i]);
+    d[0]=1;
+
+    for(i=1; i<=n; i++)
+        for(j=g; j>=w[i]; j--)
+            if(d[j-w[i]] && p[i]+d[j-w[i]]>=d[j])
+                d[j]=p[i]+d[j-w[i]];
+
+    for(i=0; i<=g; i++){
+        if (d[i]>ans)
+            ans=d[i];
+    }
+    return ans-1;
 }
