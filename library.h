@@ -1,7 +1,7 @@
 #ifndef library
 #define library
 
-    int adj_mat[100][100];
+    int adj_mat[100][100],st[100],N;
 
     typedef struct Nod{
         int data;
@@ -47,9 +47,12 @@
     void bfs_mat(int root, int n);
 
     /**Backtracking standard functions**/
-    void printSolution();
-    int valid();
-    void backtracking();
+    void inline init(int k);
+    int succesor(int k);
+    int solution(int k);
+    void printSolution(int k);
+    int valid(int k);
+    void bkt(int k);
 
     /**Dynamic Programming algorithms**/
     int count_coin( int S[], int m, int n );    // need to read m(nr of coins) and n(the sum)
