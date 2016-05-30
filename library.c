@@ -310,25 +310,54 @@ void bfs_mat(int root, int n){
     }
 }
 
-void printSolution(){
+//Generare de permutari
+void inline init(int k)
+{
+    st[k]=0;
 }
 
-int valid(){
+int succesor(int k)
+{
+    if(st[k]<N)
+    {
+        ++st[k];
+        return 1;
+    }
     return 0;
 }
 
-void backtracking(){
-    /*int pval;
-    for(pval=1;pval<=n;pval++)
-        if(d[pval]==0) {
-            d[pval]=1;
-            st[p]=pval;
-            if(p==n)
-                afiseaza(p);
-            else bktr(p+1);
-            d[pval]=0;
+int solution(int k)
+{
+    return k==N;
+}
+void printSolution(int k)
+{
+    int i;
+    for(i=1;i<=k;i++)
+        printf("%d ",st[i]);
+    printf("%c",'\n');
+}
+int valid(int k)
+{
+    int i;
+    for(i=1;i<k;i++)
+        if(st[i]==st[k])
+            return 0;
+    return 1;
+}
+void bkt(int k)
+{
+   init(k);
+   while(succesor(k))
+   {
+        if(valid(k))
+        {
+            if(solution(k))
+                printSolution(k);
+            else
+                bkt(k+1);
         }
-    */
+   }
 }
 
 int count_coin( int S[], int m, int n ){
