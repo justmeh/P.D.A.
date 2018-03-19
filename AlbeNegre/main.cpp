@@ -76,7 +76,7 @@ void give_resource(int type)
 	Sleep(1000);
 
 	unique_lock<mutex> lock(counter);
-	cout << "Thread of type " << type_string[type] << " gives up the resource " << in_use[type] << "\n";
+	cout << "Thread of type " << type_string[type] << " gives up the resource\n ";
 
 	in_use[type]--;
 
@@ -110,19 +110,19 @@ void thread_function(int type)
 int main()
 {
 	srand(time(NULL));
-	int i = 0;
+	thread t[100];
 
-	while (true)
+	for (int i = 0; i < 100; i++) 
 	{
 		Sleep(1000);
 
 		int type = rand() % 2;
-		thread(thread_function, type);
+		t[i] = thread(thread_function, type);
+	}
 
-		if (i++ == 10)
-		{
-			Sleep(5000);
-		}
+	for (int i = 0; i < 100; i++)
+	{
+		t[i].join();
 	}
 
 	return 0;
