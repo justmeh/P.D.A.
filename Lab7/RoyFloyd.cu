@@ -10,7 +10,7 @@ using namespace std;
 __global__ void matrixFloyd(float* graph, int k)
 {
     int i = blockIdx.x + threadIdx.x;
-	int j = blockIdx.y + threadIdx.y;
+    int j = blockIdx.y + threadIdx.y;
 	
     if(graph[procid][k] + graph[k][j] < graph[procid][j])
 		graph[procid][j] = graph[procid][k] + graph[k][j];
